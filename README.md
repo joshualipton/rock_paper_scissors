@@ -1,1 +1,1 @@
-# rock_paper_scissors
+A program to play rock paper scissors.
