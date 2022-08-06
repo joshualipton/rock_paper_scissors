@@ -50,7 +50,7 @@ function game() {
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      let roundResult = playRound(button.id, getComputerChoice());
+      const roundResult = playRound(button.id, getComputerChoice());
       if (roundResult.charAt(4) === "W") {
         ++playerScore;
         console.log("Win");
@@ -61,13 +61,29 @@ function game() {
       updateScore(playerScore, computerScore);
 
       if (playerScore === 5 || computerScore === 5) {
+        const body = document.querySelector("body");
+        const win = document.createElement("h3");
         if (playerScore > computerScore) {
-          console.log("You Win!");
-        } else if (computerScore > playerScore) {
-          console.log("You Lose!");
+          win.textContent = "You Win!";
         } else {
-          console.log("Tie!");
+          win.textContent = "You Lose!";
         }
+        body.appendChild(win);
+
+        const buttons = document.querySelectorAll("button");
+
+        buttons.forEach((button) => {
+          button.remove();
+        });
+
+        const reset = document.createElement("button");
+        reset.textContent = "Reset";
+
+        body.appendChild(reset);
+
+        reset.addEventListener("click", () => {
+          window.location.reload();
+        });
       }
     });
   });
